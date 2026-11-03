@@ -3,62 +3,95 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#08090a">
-  <meta name="description" content="Um registro pessoal e discreto para seus hábitos e treinos.">
+  <meta name="theme-color" content="#050506">
+  <meta name="description" content="Seu espaço pessoal para hábitos e movimento.">
   <title>FLOW — Movimento em fluxo</title>
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <a class="brand" href="#inicio" aria-label="FLOW, início"><span class="brand-mark"><img class="flow-mark" src="logo.svg" alt=""></span><span>FLOW<small>MOVIMENTO EM FLUXO</small></span></a>
-      <button class="date-button" id="dateButton" aria-label="Data de hoje"><span class="live-dot"></span><span id="todayLabel">HOJE</span></button>
-      <button class="avatar" id="settingsButton" aria-label="Configurações">B</button>
+      <a class="brand" href="#inicio" aria-label="FLOW, início">
+        <span class="brand-mark"><img class="flow-mark" src="logo.svg" alt=""></span>
+        <span class="brand-word">FLOW<small>DAILY MOTION</small></span>
+      </a>
+      <button class="date-button glass-pill" id="dateButton" aria-label="Data de hoje"><span class="live-dot"></span><span id="todayLabel">HOJE</span></button>
+      <button class="avatar glass-pill" id="settingsButton" aria-label="Abrir perfil"><span class="animated-icon">✦</span></button>
     </header>
 
     <main id="mainContent">
       <section class="screen active" id="homeScreen" data-screen="inicio">
-        <div class="hero-grid">
-          <div class="hero-copy"><p class="eyebrow">SEGUNDA-FEIRA · REGISTRO Nº <span id="dayNumber">001</span></p><h1>O trabalho<br><em>continua.</em></h1><p class="muted">Pequenos atos. Uma vontade inabalável.</p></div>
-          <div class="orbital" aria-label="Progresso diário"><svg viewBox="0 0 120 120"><circle class="orbit-track" cx="60" cy="60" r="50"/><circle class="orbit-progress" id="progressRing" cx="60" cy="60" r="50"/></svg><div class="orbital-label"><strong id="progressValue">0%</strong><span>DO DIA</span></div></div>
-        </div>
+        <section class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="eyebrow-mark"></span> PAINEL PESSOAL / FLUXO <span id="dayNumber">001</span></p>
+            <h1>Presença em<br><em>movimento.</em></h1>
+          </div>
+        </section>
 
-        <div class="section-heading"><div><p class="eyebrow">PROTOCOLO DIÁRIO</p><h2>Hoje</h2></div><button class="text-button" data-action="add-habit">＋ NOVO HÁBITO</button></div>
-        <div class="habit-list" id="habitList"></div>
+        <section class="training-feature" aria-labelledby="trainingFeatureTitle">
+          <div class="training-glow" aria-hidden="true"></div>
+          <div class="training-feature-top"><span class="eyebrow"><span class="eyebrow-mark"></span> SESSÃO DE HOJE</span><button class="training-orbit animated-icon" data-nav="treinos" aria-label="Abrir treinos">↗</button></div>
+          <div class="training-feature-body">
+            <div class="training-feature-copy"><span class="metric-label">TEMPO EM MOVIMENTO</span><h2 id="trainingFeatureTitle">0 MIN</h2><div id="workoutSummary" class="workout-summary"></div></div>
+            <div class="training-emblem" aria-label="Progresso das atividades de hoje"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="orbit-track" cx="60" cy="60" r="50"/><circle class="orbit-progress" id="progressRing" cx="60" cy="60" r="50"/></svg><div class="emblem-progress-label" aria-live="polite"><strong id="progressValue">0%</strong></div></div>
+          </div>
+        </section>
 
-        <section class="training-card"><div class="training-head"><div><p class="eyebrow">MOVIMENTO</p><h2>Treino de hoje</h2></div><button class="icon-button" data-action="add-workout" aria-label="Adicionar treino">＋</button></div><div class="workout-summary" id="workoutSummary"></div><button class="outline-button full" data-action="add-workout">REGISTRAR ATIVIDADE <span>↗</span></button></section>
+        <section class="weekly-section" aria-labelledby="weekTitle">
+          <div class="section-heading weekly-heading">
+            <div><p class="eyebrow">PULSO · <span id="weekRange">SEMANA</span></p><h2 id="weekTitle">Pulso semanal</h2></div>
+            <span class="week-total glass-pill" id="weekTotal">0 / 7 DIAS</span>
+          </div>
+          <div class="weekly-card glass-panel"><div class="week-chart-note"><span>INTENSIDADE DA SEMANA</span><i></i><span>HOJE</span></div><div class="week-grid" id="weekGrid" aria-label="Atividade ao longo da semana"></div></div>
+        </section>
 
-        <section class="week-section"><div class="section-heading compact"><div><p class="eyebrow">CONSISTÊNCIA</p><h2>Esta semana</h2></div><span class="week-total" id="weekTotal">0 / 7 DIAS</span></div><div class="week-grid" id="weekGrid"></div></section>
+        <section class="tasks-section" aria-labelledby="tasksTitle">
+          <div class="section-heading tasks-heading">
+            <div><p class="eyebrow">ATIVIDADE DO DIA</p><h2 id="tasksTitle">Próxima ação<span class="title-dot">.</span></h2></div>
+            <span class="tasks-count" id="ritualSummary">00 / 00</span>
+            <button class="text-button glass-pill" data-action="add-habit"><span class="animated-icon">＋</span> ADICIONAR</button>
+          </div>
+          <div class="habit-list" id="habitList"></div>
+        </section>
       </section>
 
       <section class="screen" id="trainingScreen" data-screen="treinos">
-        <div class="page-intro"><p class="eyebrow">CONDICIONAMENTO</p><h1>Treinos<br><em>registrados.</em></h1><p class="muted">Todo esforço deixa uma marca.</p></div>
+        <div class="page-intro"><p class="eyebrow">ENERGIA EM MOVIMENTO</p><h1>Treinos<br><em>registrados.</em></h1><p class="hero-subtitle">Cada sessão deixa sua marca.</p></div>
         <div class="activity-types" id="activityTypes"></div>
-        <div class="section-heading"><div><p class="eyebrow">SEU HISTÓRICO</p><h2>Atividades</h2></div><button class="text-button" data-action="add-workout">＋ REGISTRAR</button></div>
+        <div class="section-heading"><div><p class="eyebrow">SEU HISTÓRICO</p><h2>Atividades</h2></div><button class="text-button glass-pill" data-action="add-workout"><span class="animated-icon">＋</span> REGISTRAR</button></div>
         <div class="history-list" id="historyList"></div>
       </section>
 
       <section class="screen" id="ritualScreen" data-screen="ritual">
-        <div class="page-intro"><p class="eyebrow">CONSTRUÇÃO PESSOAL</p><h1>Rituais<br><em>diários.</em></h1><p class="muted">A disciplina é uma escolha que se repete.</p></div>
-        <div class="ritual-stats"><div><span id="ritualCount">0</span><small>ATIVOS</small></div><div><span id="bestStreak">0</span><small>MELHOR SEQUÊNCIA</small></div></div>
-        <div class="section-heading"><div><p class="eyebrow">SEU PROTOCOLO</p><h2>Hábitos</h2></div><button class="text-button" data-action="add-habit">＋ CRIAR</button></div>
+        <div class="page-intro"><p class="eyebrow">A FORÇA DA REPETIÇÃO</p><h1>Atividade<br><em>diária.</em></h1><p class="hero-subtitle">O que você repete se torna parte de você.</p></div>
+        <div class="ritual-stats glass-panel"><div><span id="ritualCount">0</span><small>ATIVIDADES ATIVAS</small></div><div><span id="bestStreak">0</span><small>MELHOR SEQUÊNCIA</small></div></div>
+        <div class="section-heading"><div><p class="eyebrow">SEU PROTOCOLO</p><h2>Atividades</h2></div><button class="text-button glass-pill" data-action="add-habit"><span class="animated-icon">＋</span> CRIAR</button></div>
         <div class="habit-list" id="allHabitList"></div>
       </section>
 
       <section class="screen" id="profileScreen" data-screen="perfil">
-        <div class="page-intro"><p class="eyebrow">ARQUIVO PESSOAL</p><h1>Seu<br><em>progresso.</em></h1><p class="muted">Seus dados permanecem neste dispositivo.</p></div>
-        <div class="profile-panel"><div class="profile-emblem"><img class="flow-mark" src="logo.svg" alt=""></div><p class="eyebrow">FLOW · PERFIL LOCAL</p><h2>O caminho é seu.</h2><p>Sem conta. Sem competição. Apenas você contra a inércia.</p></div>
-        <div class="metric-grid"><div class="metric"><span id="totalWorkouts">0</span><small>TREINOS</small></div><div class="metric"><span id="totalMinutes">0</span><small>MINUTOS</small></div><div class="metric"><span id="totalHabitsDone">0</span><small>RITUAIS CUMPRIDOS</small></div></div>
-        <button class="outline-button full" id="exportButton">EXPORTAR MEUS DADOS <span>↗</span></button>
+        <div class="page-intro"><p class="eyebrow">ARQUIVO PESSOAL</p><h1>Seu<br><em>progresso.</em></h1><p class="hero-subtitle">Seus dados permanecem neste dispositivo.</p></div>
+        <div class="profile-panel glass-panel"><div class="profile-emblem"><img class="flow-mark" src="logo.svg" alt=""></div><p class="eyebrow">FLOW · PERFIL LOCAL</p><h2>O caminho é seu.</h2><p>Sem conta. Sem competição. Um dia de cada vez.</p></div>
+        <div class="metric-grid"><div class="metric glass-panel"><span id="totalWorkouts">0</span><small>TREINOS</small></div><div class="metric glass-panel"><span id="totalMinutes">0</span><small>MINUTOS</small></div><div class="metric glass-panel"><span id="totalHabitsDone">0</span><small>ATIVIDADES CONCLUÍDAS</small></div></div>
+        <button class="outline-button full" id="exportButton">EXPORTAR MEUS DADOS <span class="animated-icon">↗</span></button>
         <button class="subtle-danger" id="resetButton">APAGAR TODOS OS DADOS</button>
       </section>
     </main>
 
-    <nav class="bottom-nav" aria-label="Navegação principal"><button class="nav-item selected" data-nav="inicio"><span class="nav-glyph">⌂</span><small>INÍCIO</small></button><button class="nav-item" data-nav="treinos"><span class="nav-glyph">⌁</span><small>TREINOS</small></button><button class="nav-item" data-nav="ritual"><span class="nav-glyph">◉</span><small>RITUAIS</small></button><button class="nav-item" data-nav="perfil"><span class="nav-glyph">◌</span><small>PERFIL</small></button></nav>
+    <nav class="bottom-nav glass-panel" aria-label="Navegação principal">
+      <button class="nav-item selected" data-nav="inicio"><span class="nav-icon animated-icon" aria-hidden="true">⌂</span><small>INÍCIO</small></button>
+      <button class="nav-item" data-nav="treinos"><span class="nav-icon animated-icon" aria-hidden="true">↗</span><small>TREINOS</small></button>
+      <button class="nav-item" data-nav="ritual"><span class="nav-icon animated-icon" aria-hidden="true">✳</span><small>ATIVIDADE</small></button>
+      <button class="nav-item" data-nav="perfil"><span class="nav-icon animated-icon" aria-hidden="true">◉</span><small>PERFIL</small></button>
+    </nav>
   </div>
-  <div class="toast" id="toast" role="status"></div>
-  <dialog id="entryDialog" class="entry-dialog"><form method="dialog" id="entryForm"><button class="close-dialog" value="cancel" aria-label="Fechar">×</button><p class="eyebrow" id="dialogEyebrow">NOVO REGISTRO</p><h2 id="dialogTitle">Novo hábito</h2><div id="dialogFields"></div><div class="dialog-actions"><button class="outline-button" value="cancel">CANCELAR</button><button class="solid-button" id="saveEntry" value="default">SALVAR <span>↗</span></button></div></form></dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="entryDialog" class="entry-dialog"><form method="dialog" id="entryForm"><button class="close-dialog" value="cancel" aria-label="Fechar">×</button><p class="eyebrow" id="dialogEyebrow">NOVO REGISTRO</p><h2 id="dialogTitle">Novo hábito</h2><div id="dialogFields"></div><div class="dialog-actions"><button class="outline-button" value="cancel">CANCELAR</button><button class="solid-button" id="saveEntry" value="default">SALVAR <span class="animated-icon">↗</span></button></div></form></dialog>
   <script src="script.js"></script>
 </body>
 </html>
